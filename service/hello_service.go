@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"fmt"
+
 	"github.com/TAhirr01/firstmodule/pb"
 )
 
@@ -14,6 +16,7 @@ func NewHelloService() pb.HelloServiceServer {
 }
 
 func (service *HelloService) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
+	fmt.Println("SayHello called")
 	helloResponse := "Salam " + req.GetName()
 
 	return &pb.HelloResponse{
