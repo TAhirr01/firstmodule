@@ -25,8 +25,10 @@ func (service *UserService) RegisterUser(ctx context.Context, req *pb.UserReques
 	fmt.Println("UserService::RegisterUser called")
 	var user *models.User
 	err := service.db.Where("email = ?", req.GetEmail()).First(&user).Error
-	if err != nil || user != nil {
-		fmt.Println("User already exists")
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, err
+	}
+	if err == nil {
 		return nil, ErrUserAlreadyExists
 	}
 	user = &models.User{

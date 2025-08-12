@@ -22,7 +22,9 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	grpcServer := grpc.NewServer()
-	pb.RegisterUserServiceServer(grpcServer, &service.UserService{})
+	db := initializers.DB
+	userService := service.NewUserService(db)
+	pb.RegisterUserServiceServer(grpcServer, userService)
 
 	log.Println("grpc server listening on :50051")
 	if err := grpcServer.Serve(lis); err != nil {
