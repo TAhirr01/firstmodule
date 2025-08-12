@@ -1,4 +1,4 @@
-module firstmodule
+module github.com/TAhirr01/firstmodule
 
 go 1.24.5
 

@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"firstmodule/pb"
+	"github.com/TAhirr01/firstmodule/pb"
 )
 
 type HelloService struct {

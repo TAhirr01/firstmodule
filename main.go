@@ -1,10 +1,11 @@
 package main
 
 import (
-	"firstmodule/pb"
-	"firstmodule/service"
 	"log"
 	"net"
+
+	"github.com/TAhirr01/firstmodule/pb"
+	"github.com/TAhirr01/firstmodule/service"
 
 	"google.golang.org/grpc"
 )
