@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  proto:
+    cmds:
+      - protoc --proto_path=proto proto/*.proto  --go_out=:pb --go-grpc_out=:pb
+  run:
+    cmds:
+      - go run main.go
