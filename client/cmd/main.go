@@ -17,17 +17,17 @@ func main() {
 	}
 	client := pb.NewUserServiceClient(lis)
 
-	//registerResponse, err := client.RegisterUser(context.Background(), &pb.UserRequest{
-	//	Name:     "Test",
-	//	Email:    "tahirqasimov002@gmail.com",
-	//	Password: "123456",
-	//	Age:      222,
-	//})
-	//if err != nil {
-	//	log.Fatalln(err)
-	//}
-	//log.Println(registerResponse)
-	//log.Println()
+	registerResponse, err := client.RegisterUser(context.Background(), &pb.UserRequest{
+		Name:     "Test",
+		Email:    "tahirqasimov002@gmail.com",
+		Password: "123456",
+		Age:      222,
+	})
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Println(registerResponse)
+	log.Println()
 
 	findbyidResponse, err := client.FindUserById(context.Background(), &pb.UserId{Id: 1})
 	if err != nil {
