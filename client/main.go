@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/TAhirr01/firstmodule/pb"
-	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -19,8 +18,8 @@ func main() {
 
 	registerResponse, err := client.RegisterUser(context.Background(), &pb.UserRequest{
 		Name:     "Test",
-		Email:    "tahirqasimov002@gmail.com",
-		Password: "123456",
+		Email:    "test@test.com",
+		Password: "Tahir2005",
 		Age:      222,
 	})
 	if err != nil {
@@ -29,19 +28,19 @@ func main() {
 	log.Println(registerResponse)
 	log.Println()
 
-	findbyidResponse, err := client.FindUserById(context.Background(), &pb.UserId{Id: 1})
-	if err != nil {
-		log.Fatalln(err)
-	}
-	log.Println(findbyidResponse)
-	log.Println()
-
-	finAllUsersResponse, err := client.FindAllUsers(context.Background(), &empty.Empty{})
-
-	if err != nil {
-		log.Fatalln(err)
-	}
-	log.Println(finAllUsersResponse)
-	log.Println()
+	//findbyidResponse, err := client.FindUserById(context.Background(), &pb.UserId{Id: 1})
+	//if err != nil {
+	//	log.Fatalln(err)
+	//}
+	//log.Println(findbyidResponse)
+	//log.Println()
+	//
+	//finAllUsersResponse, err := client.FindAllUsers(context.Background(), &empty.Empty{})
+	//
+	//if err != nil {
+	//	log.Fatalln(err)
+	//}
+	//log.Println(finAllUsersResponse)
+	//log.Println()
 
 }

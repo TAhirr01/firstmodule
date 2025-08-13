@@ -16,4 +16,5 @@ func ConnectToDb() {
 		log.Fatal("Db baglantisi alinmadi: ", err)
 	}
 	DB = db
+
 }

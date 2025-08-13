@@ -2,7 +2,7 @@ syntax="proto3";
 
 package proto;
 
-option go_package=".;pb";
+option go_package="/user.;pb";
 import "google/protobuf/empty.proto";
 
 message UserRequest{
@@ -15,18 +15,24 @@ message UserRequest{
 message UserId{
   int32 id=1;
 }
-
 message UserResponse{
-  string email=1;
-  string name=2;
+  int32 id=1;
+  string email=2;
+  string name=3;
+  string passwordHash=4;
 }
 
 message GetAllUsersResponse{
   repeated UserResponse users=1;
 }
 
+message Email{
+  string email=1;
+}
+
 service UserService{
   rpc RegisterUser(UserRequest) returns (UserResponse);
   rpc FindUserById(UserId) returns (UserResponse);
   rpc FindAllUsers(google.protobuf.Empty) returns (GetAllUsersResponse);
+  rpc FindUserByEmail(Email) returns (UserResponse);
 }
