@@ -7,6 +7,7 @@ import (
 
 	"github.com/TAhirr01/firstmodule/models"
 	"github.com/TAhirr01/firstmodule/pb"
+	"google.golang.org/protobuf/types/known/emptypb"
 	"gorm.io/gorm"
 )
 
@@ -48,4 +49,35 @@ func (service *UserService) RegisterUser(ctx context.Context, req *pb.UserReques
 	}
 
 	return userDto, nil
+}
+
+func (service *UserService) FindUserById(ctx context.Context, req *pb.UserId) (*pb.UserResponse, error) {
+	fmt.Println("UserService::FindUserById called")
+	var user *models.User
+	err := service.db.First(&user, req.GetId()).Error
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, err
+	}
+	return &pb.UserResponse{
+		Name:  user.Name,
+		Email: user.Email,
+	}, nil
+}
+func (service *UserService) FindAllUsers(ctx context.Context, req *emptypb.Empty) (*pb.GetAllUsersResponse, error) {
+	fmt.Println("UserService::FindAllUsers called")
+	var users []models.User
+	err := service.db.Find(&users).Error
+	if err != nil {
+		return nil, err
+	}
+	pbUsers := make([]*pb.UserResponse, len(users))
+	for i, user := range users {
+		pbUsers[i] = &pb.UserResponse{
+			Name:  user.Name,
+			Email: user.Email,
+		}
+	}
+	return &pb.GetAllUsersResponse{
+		Users: pbUsers,
+	}, nil
 }
